@@ -30,6 +30,7 @@ const apartments = [
 ];
 
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
+const WEBHOOK = JSON.parse(process.env.WEBHOOK);
 
 const PROJECTID = CREDENTIALS['project_id'];
 
@@ -123,10 +124,9 @@ const callDialogFlow = async (queryText, sessionId) => {
 
 const sendMessage = async (to, message) => {
   try {
-    const phoneNumberId = '117158507969853';
-    const version = 'v15.0';
-    const bearerToken =
-      'Bearer EAAT2cYCAQboBAHZBghKu7aqAhAXsFi5YYsXs2MpCy2gAvHdZCQlTrakDnyTZCQSfDE3QFnApm4H6itHGjyaPGZAAdUkzs2RgAbCSLp85OjZBZAOwGSPMUieV1nPfKe58jjphT2q5MwPsdFsijQoSITGpabu6thxdp0v2XBvi5fYbvjc9W2I4XwFHQr8LtN9QqY92TeihEotgZDZD';
+    const phoneNumberId = WEBHOOK['phoneNumberId'];
+    const version =  WEBHOOK['version'];
+    const bearerToken = WEBHOOK['accessToken'];
 
     const { data } = await axios.post(
       `https://graph.facebook.com/${version}/${phoneNumberId}/messages`,
